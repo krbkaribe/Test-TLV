@@ -25,5 +25,5 @@ Los escenarios comunes de error son:
 Repositorio Git: https://github.com/krbkaribe/Test-TLV.git
 Link Travis CI:  https://travis-ci.com/krbkaribe/Test-TLV
 Para compilar, debe seguir los siguientes pasos:
-	- En una ventana de símbolo del sistema compile con la herramienta go: %USERPROFILE%\go\src\functiontlv> go build
-	- Ejecútelo para iniciar y ver el resultado: %USERPROFILE%\go\src\functiontlv>functiontlv
+	- En una ventana de símbolo del sistema compile con la herramienta go: %USERPROFILE%\go\src\Test-TLV\functiontlv> go build
+	- Ejecútelo para iniciar y ver el resultado: %USERPROFILE%\go\src\Test-TLV\functiontlv>functiontlv

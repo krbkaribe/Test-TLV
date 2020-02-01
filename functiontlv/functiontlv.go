@@ -1,4 +1,4 @@
-package functiontvl
+package main
 
 import (
 	"fmt"
@@ -30,24 +30,25 @@ func validateMap(strArr string, mapResult map[string]string, err *string) {
 			}
 		}
 		mapResult["Largo"+strconv.Itoa(i)+":"] = strArr[i:(i + 2)]
-		mapResult["Tipo"+strconv.Itoa(i)+" :"] = (typea + strArr[(i+3):(i+5)])
+		mapResult["Tipo"+strconv.Itoa(i)+" :"] = typea + strArr[(i+3):(i+5)]
 		mapResult["Valor"+strconv.Itoa(i)+":"] = strArr[typeb:(typeb + length)]
 
 		i = int(length) + int(typeb) - 1
 	}
 }
 
-func generateMap(mapResult map[string]string, arrBytes []byte, err *string) {
+func generateMap(mapResult map[string]string, arrBytes []byte) (err string) {
 	strArr := string(arrBytes[:])
 	valArr, e := strconv.ParseInt(strArr, 10, 64)
 
 	if len(strArr) > 0 && valArr > 0 && e == nil {
-		*err = "Error: El arreglo tiene el formato incorrecto. Es numérico."
+		err = "Error: El arreglo tiene el formato incorrecto. Es numérico."
 	} else if strArr == "" {
-		*err = "Error: El arreglo tiene el formato incorrecto. Está vacío."
+		err = "Error: El arreglo tiene el formato incorrecto. Está vacío."
 	} else {
-		validateMap(strArr, mapResult, err)
+		validateMap(strArr, mapResult, &err)
 	}
+	return err
 }
 
 func printResult(mapResult map[string]string, err string) {
@@ -60,9 +61,8 @@ func printResult(mapResult map[string]string, err string) {
 
 func main() {
 	mapResult := make(map[string]string)
-	var err string
-	arrBytes := []byte{49, 49, 65, 48, 53, 65, 66, 51, 57, 56, 55, 54, 53, 85, 74, 49, 48, 50, 78, 50, 51, 48, 48}
+	arrBytes := []byte{49, 49, 65, 48, 53, 65, 66, 51, 57, 56, 55, 54, 53, 85, 74, 49, 48, 50, 78, 50, 49, 48, 48}
 
-	generateMap(mapResult, arrBytes, &err)
+	var err string = generateMap(mapResult, arrBytes)
 	printResult(mapResult, err)
 }
