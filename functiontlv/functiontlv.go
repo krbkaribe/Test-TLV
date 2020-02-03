@@ -11,6 +11,7 @@ func validateMap(strArr string, mapResult map[string]string, err *string) {
 		length, e := strconv.ParseInt(strArr[i:(i+2)], 10, 8)
 		if e != nil {
 			*err = "Error: El arreglo tiene el formato incorrecto. El largo es inválido."
+			break
 		}
 
 		var value int64
@@ -19,8 +20,10 @@ func validateMap(strArr string, mapResult map[string]string, err *string) {
 
 		if (typea != "A" && typea != "N") || e != nil {
 			*err = "Error: El arreglo tiene el formato incorrecto. El tipo es inválido."
+			break
 		} else if int(typeb+length) > len(strArr) {
 			*err = "Error: El arreglo tiene el formato incorrecto. El tipo sobrepasa el arreglo."
+			break
 		} else {
 			if typea == "N" {
 				value, e = strconv.ParseInt((strArr[typeb:(typeb + length)]), 10, 64)
@@ -61,7 +64,7 @@ func printResult(mapResult map[string]string, err string) {
 
 func main() {
 	mapResult := make(map[string]string)
-	arrBytes := []byte{49, 49, 65, 48, 53, 65, 66, 51, 57, 56, 55, 54, 53, 85, 74, 49, 48, 50, 78, 50, 49, 48, 48}
+	arrBytes := []byte{49, 49, 65, 48, 53, 65, 66, 51, 57, 56, 55, 54, 53, 85, 74, 49, 48, 50, 78, 50, 51, 48, 48}
 
 	var err string = generateMap(mapResult, arrBytes)
 	printResult(mapResult, err)
